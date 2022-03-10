@@ -6,6 +6,9 @@ import pandas as pd
 from pyfred.ex import ApiKeyNotFound, FredItemNotFound
 
 
+# API doc: https://fred.stlouisfed.org/docs/api/fred/
+
+
 BASE_URL = "https://api.stlouisfed.org/fred"
 FILE_TYPE = "json"
 ROOT_CATEGORY_ID = 0
@@ -35,6 +38,18 @@ class FredClient(object):
     # --------------------------------------------------------------------------
 
     def get_category(self, category_id):
+        """Get a category.
+
+        Parameters
+        ----------
+        category_id : int
+
+        Returns
+        -------
+        dict
+            A dict with information about the category.
+        """
+
         data = self.get("category", url_args={"category_id": category_id})
         categories = data["categories"]
         if len(categories) == 0:
@@ -42,17 +57,88 @@ class FredClient(object):
         return categories[0]
 
     def get_category_children(self, category_id):
+        """Get the child categories for a specified parent category.
+
+        Parameters
+        ----------
+        category_id : int
+
+        Returns
+        -------
+        list
+            List of category dicts.
+        """
+
         data = self.get("category/children",
                         url_args={"category_id": category_id})
         categories = data["categories"]
         return categories
 
     def get_root_categories(self):
+        """Get the root categories.
+
+        Returns
+        -------
+        list
+            list of category dicts
+        """
         return self.get_category_children(category_id=ROOT_CATEGORY_ID)
 
     def get_category_seriess(self, category_id):
+        """Get the series in a category.
+
+        Parameters
+        ----------
+        category_id : int
+
+        Returns
+        -------
+        dict
+            A dict with information about the series.
+        """
         data = self.get("category/series",
                         url_args={"category_id": category_id})
         seriess = data["seriess"]
         return seriess
 
+    def get_series_info(self, series_id):
+        """Get an economic data series.
+
+        Parameters
+        ----------
+        series_id : int
+
+        Returns
+        -------
+        dict
+            A dict with information about the series.
+        """
+        data = self.get("series", url_args={"series_id": series_id})
+        seriess = data["seriess"]
+        if len(seriess) == 0:
+            raise FredItemNotFound(f"Series not found: {seriess}")
+        return seriess[0]
+
+    def get_series(self, series_id):
+        """Get the observations or data values for an economic data series.
+
+        Parameters
+        ----------
+        series_id : int
+
+        Returns
+        -------
+        Series
+            A pandas Series for the Fred series.
+        """
+        data = self.get("series/observations", url_args={"series_id": series_id})
+        index = []
+        values = []
+        for obs in data["observations"]:
+            index.append(pd.to_datetime(obs["date"], format="%Y-%m-%d"))
+            try:
+                values.append(float(obs["value"]))
+            except ValueError:
+                values.append(float("NaN"))
+
+        return pd.Series(values, index=index)

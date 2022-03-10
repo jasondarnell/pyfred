@@ -16,9 +16,18 @@ def main():
     results = fred.get_category_children(category_id=104)
     pprint(results)
 
-
-    seriess = fred.get_series(category_id=33735)
+    seriess = fred.get_category_seriess(category_id=33735)
     pprint(seriess[0])
+
+    series_id = seriess[0]["id"]
+
+    data = fred.get_series_info(series_id=series_id)
+    pprint(data)
+
+    data = fred.get_series(series_id=series_id)
+    pprint(data)
+
+
 
 if __name__ == "__main__":
     main()
