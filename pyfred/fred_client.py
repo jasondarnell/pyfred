@@ -69,24 +69,18 @@ class FredClient(object):
     def get_root_categories(self):
         """Get the root categories.
 
-        Returns
-        -------
-        list
-            list of category dicts
+        :return: List of root category dicts.
+        :rtype: list
         """
         return self.get_category_children(category_id=ROOT_CATEGORY_ID)
 
     def get_category_seriess(self, category_id):
         """Get the series in a category.
 
-        Parameters
-        ----------
-        category_id : int
-
-        Returns
-        -------
-        dict
-            A dict with information about the series.
+        :param category_id: Category ID
+        :type category_id: int
+        :return: List of series for the given category id.
+        :rtype: list
         """
         data = self._get("category/series",
                         url_args={"category_id": category_id})
@@ -96,14 +90,10 @@ class FredClient(object):
     def get_series_info(self, series_id):
         """Get an economic data series.
 
-        Parameters
-        ----------
-        series_id : int
-
-        Returns
-        -------
-        dict
-            A dict with information about the series.
+        :param series_id: Series ID
+        :type series_id: int
+        :return: A dict with information about the series.
+        :rtype: dict
         """
         data = self._get("series", url_args={"series_id": series_id})
         seriess = data["seriess"]
@@ -114,14 +104,11 @@ class FredClient(object):
     def get_series(self, series_id):
         """Get the observations or data values for an economic data series.
 
-        Parameters
-        ----------
-        series_id : int
 
-        Returns
-        -------
-        Series
-            A pandas Series for the Fred series.
+        :param series_id: Series ID
+        :type series_id: int
+        :return: A pandas Series for the Fred series.
+        :rtype: pandas.Series
         """
         data = self._get("series/observations", url_args={"series_id": series_id})
         index = []
