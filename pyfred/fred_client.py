@@ -40,14 +40,10 @@ class FredClient(object):
     def get_category(self, category_id):
         """Get a category.
 
-        Parameters
-        ----------
-        category_id : int
-
-        Returns
-        -------
-        dict
-            A dict with information about the category.
+        :param category_id: Category ID
+        :type category_id: int
+        :return: A dict with information about the category.
+        :rtype: dict
         """
 
         data = self._get("category", url_args={"category_id": category_id})
@@ -59,14 +55,10 @@ class FredClient(object):
     def get_category_children(self, category_id):
         """Get the child categories for a specified parent category.
 
-        Parameters
-        ----------
-        category_id : int
-
-        Returns
-        -------
-        list
-            List of category dicts.
+        :param category_id: Category ID
+        :type category_id: int
+        :return: List of category dicts.
+        :rtype: list
         """
 
         data = self._get("category/children",
