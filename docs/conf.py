@@ -5,7 +5,7 @@
 import pyfred
 
 project = 'pyfred'
-copyright = '2022, Graziella'
+copyright = '2022, Jason Darnell'
 author = 'Jason Darnell'
 
 release = version = pyfred.__version__
