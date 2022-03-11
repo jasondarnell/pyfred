@@ -23,10 +23,11 @@ jobs:
         run: ./run_tests.sh
       - name: Build
         run: python setup.py bdist_wheel
-      - name: Release
+      - shell: bash
+        name: Release
         env:
-          PYPI_USER: ${{ env1.PYPI_USER }}
-          PYPI_PASSWORD: ${{ env1.PYPI_PASSWORD }}
+          PYPI_USER: ${{ secrets.PYPI_USER }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           echo $PYPI_USER
           twine upload --username "$PYPI_USER" --password "$PYPI_PASSWORD" dist/*
