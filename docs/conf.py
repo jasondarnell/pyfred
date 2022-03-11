@@ -2,12 +2,13 @@
 
 # -- Project information
 
+import pyfred
+
 project = 'pyfred'
 copyright = '2022, Graziella'
 author = 'Jason Darnell'
 
-release = '0.1'
-version = '0.1.0'
+release = version = pyfred.__version__
 
 # -- General configuration
 
