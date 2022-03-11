@@ -91,7 +91,7 @@ class FredClient(object):
         """Get an economic data series.
 
         :param series_id: Series ID
-        :type series_id: int
+        :type series_id: string
         :return: A dict with information about the series.
         :rtype: dict
         """
@@ -106,7 +106,7 @@ class FredClient(object):
 
 
         :param series_id: Series ID
-        :type series_id: int
+        :type series_id: string
         :return: A pandas Series for the Fred series.
         :rtype: pandas.Series
         """
