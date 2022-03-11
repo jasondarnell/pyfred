@@ -24,4 +24,7 @@ jobs:
       - name: Build
         run: python setup.py bdist_wheel
       - name: Release
+        env:
+          PYPI_USER: ${{ secrets.PYPI_USER }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: twine upload --username $PYPI_USER --password $PYPI_PASSWORD dist/*
