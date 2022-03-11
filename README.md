@@ -18,3 +18,9 @@ The official documentation is hosted on Read the Docs: [https://pyfredclient.rea
  - FRED: [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/)
  - FRED API Documentation: [https://fred.stlouisfed.org/docs/api/fred/](https://fred.stlouisfed.org/docs/api/fred/)
  - PyFred Documentation[https://pyfredclient.readthedocs.io/en/latest/?](https://pyfredclient.readthedocs.io/en/latest/?)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2022-present, Jason Darnell

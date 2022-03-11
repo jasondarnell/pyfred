@@ -31,6 +31,6 @@ setup(
     },
     author="Jason Darnell",
     email="jasdarnell@gmail.com",
-    license="Proprietary",
+    license="MIT",
     url=""
 )
