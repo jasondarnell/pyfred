@@ -8,10 +8,20 @@ Python client for the St. Louis Federal Reserve FRED API for economic data.
 
 ```pip install pyfred```
 
-
 ## Documentation
 
 The official documentation is hosted on Read the Docs: [https://pyfredclient.readthedocs.io/en/stable](https://pyfredclient.readthedocs.io/en/stable).
+
+## Usage
+
+```
+    from pyfred import FredClient
+    
+    fred = FredClient(api_key=<YOUR_API_KEY>)
+
+    debt_to_gdp_series = fred.get_series(series_id="GFDEGDQ188S")
+    print(debt_to_gdp_series)
+```
 
 ## Links
 
