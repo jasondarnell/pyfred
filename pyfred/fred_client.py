@@ -23,7 +23,7 @@ class FredClient(object):
                                  "set FRED_API_KEY as an environment variable.")
         self._api_key = api_key
 
-    def get(self, path, url_args={}):
+    def _get(self, path, url_args={}):
         url_args["api_key"] = self._api_key
         url_args["file_type"] = FILE_TYPE
         args = "&".join([
@@ -50,7 +50,7 @@ class FredClient(object):
             A dict with information about the category.
         """
 
-        data = self.get("category", url_args={"category_id": category_id})
+        data = self._get("category", url_args={"category_id": category_id})
         categories = data["categories"]
         if len(categories) == 0:
             raise FredItemNotFound(f"Category not found: {category_id}")
@@ -69,7 +69,7 @@ class FredClient(object):
             List of category dicts.
         """
 
-        data = self.get("category/children",
+        data = self._get("category/children",
                         url_args={"category_id": category_id})
         categories = data["categories"]
         return categories
@@ -96,7 +96,7 @@ class FredClient(object):
         dict
             A dict with information about the series.
         """
-        data = self.get("category/series",
+        data = self._get("category/series",
                         url_args={"category_id": category_id})
         seriess = data["seriess"]
         return seriess
@@ -113,7 +113,7 @@ class FredClient(object):
         dict
             A dict with information about the series.
         """
-        data = self.get("series", url_args={"series_id": series_id})
+        data = self._get("series", url_args={"series_id": series_id})
         seriess = data["seriess"]
         if len(seriess) == 0:
             raise FredItemNotFound(f"Series not found: {seriess}")
@@ -131,7 +131,7 @@ class FredClient(object):
         Series
             A pandas Series for the Fred series.
         """
-        data = self.get("series/observations", url_args={"series_id": series_id})
+        data = self._get("series/observations", url_args={"series_id": series_id})
         index = []
         values = []
         for obs in data["observations"]:
