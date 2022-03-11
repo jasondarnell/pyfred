@@ -1,10 +1,6 @@
 API
 ===
 
-.. autosummary::
-   :toctree: generated
-
-   pyfred
 
 The ``FredClient`` class
 *****************************
