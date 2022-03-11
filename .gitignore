@@ -32,6 +32,7 @@
 # Unit test / coverage reports
 *.tox/
 *.coverage
+cov_html
 *.cache
 *nosetests.xml
 *coverage.xml
