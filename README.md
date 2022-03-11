@@ -1,5 +1,7 @@
 # PyFred
 
+![example workflow](https://github.com/jasondarnell/pyfred/actions/workflows/tests.yml/badge.svg)
+
 Python client for the St. Louis Federal Reserve FRED API for economic data.
 
 **This project is in under development.**
