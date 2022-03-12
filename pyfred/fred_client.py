@@ -87,6 +87,20 @@ class FredClient(object):
         seriess = data["seriess"]
         return seriess
 
+
+    def get_related_categories(self, category_id):
+        """Get the related categories for a category.
+
+        :param category_id: Category ID
+        :type category_id: int
+        :return: List of related category dicts
+        :rtype: list
+        """
+        data = self._get("category/related",
+                        url_args={"category_id": category_id})
+        categories = data["categories"]
+        return categories
+
     def get_series_info(self, series_id):
         """Get an economic data series.
 
