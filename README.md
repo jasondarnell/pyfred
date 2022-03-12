@@ -16,13 +16,16 @@ The official documentation is hosted on Read the Docs: [https://pyfredclient.rea
 
 ## Usage
 
+Create client
 ```
-    from pyfred import FredClient
-    
-    fred = FredClient(api_key=<YOUR_API_KEY>)
+from pyfred import FredClient
+fred = FredClient(api_key=<YOUR_API_KEY>)
+```
 
-    debt_to_gdp_series = fred.get_series(series_id="GFDEGDQ188S")
-    print(debt_to_gdp_series)
+Get series
+```
+debt_to_gdp_series = fred.get_series(series_id="GFDEGDQ188S")
+print(debt_to_gdp_series)
 ```
 
 ## Links
