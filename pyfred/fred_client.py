@@ -33,6 +33,9 @@ class FredClient(object):
         r = requests.get(url)
         # TODO: validate
         data = r.json()
+        print(f"\nURL: {url}")
+        print(data)
+        print("")
         return data
 
     # --------------------------------------------------------------------------
