@@ -4,6 +4,8 @@
 
 Python client for the St. Louis Federal Reserve FRED API for economic data.
 
+PyFred is not endorsed or certified by the Federal Reserve Bank of St. Louis.
+
 **This project is in under development.**
 
 ## Installation
@@ -24,7 +26,7 @@ fred = FredClient(api_key=<YOUR_API_KEY>)
 
 Get series
 ```
-debt_to_gdp_series = fred.get_series(series_id="GFDEGDQ188S")
+debt_to_gdp_series = fred.get_series_observations_pd(series_id="GFDEGDQ188S")
 print(debt_to_gdp_series)
 ```
 
