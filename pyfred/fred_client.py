@@ -65,9 +65,9 @@ class FredClient(object):
         :param category_id: Category ID
         :type category_id: int
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :return: List of category dicts.
         :rtype: list
         """
@@ -95,9 +95,9 @@ class FredClient(object):
         :param category_id: Category ID
         :type category_id: int
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :return: List of related category dicts
         :rtype: list
         """
@@ -121,9 +121,9 @@ class FredClient(object):
         :param category_id: Category ID
         :type category_id: int
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :param limit: The maximum number of results to return.
         :type limit: int, optional
         :param offset: Offset
@@ -174,9 +174,9 @@ class FredClient(object):
         :param series_id: Series ID
         :type series_id: string
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :return: A dict with information about the series.
         :rtype: dict
         """
@@ -204,9 +204,9 @@ class FredClient(object):
         :param series_id: Series ID
         :type series_id: string
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :param limit: The maximum number of results to return.
         :type limit: int, optional
         :param offset: Offset
@@ -261,9 +261,9 @@ class FredClient(object):
         :param series_id: Series ID
         :type series_id: string
         :param realtime_start: YYYY-MM-DD formatted string
-        :type realtime_start: string or None
+        :type realtime_start: str, optional
         :param realtime_end: YYYY-MM-DD formatted string
-        :type realtime_end: string or None
+        :type realtime_end: str, optional
         :param limit: The maximum number of results to return.
         :type limit: int, optional
         :param offset: Offset
