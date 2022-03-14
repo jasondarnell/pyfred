@@ -125,21 +125,21 @@ class FredClient(object):
         :param realtime_end: YYYY-MM-DD formatted string
         :type realtime_end: string or None
         :param limit: The maximum number of results to return.
-        :type limit: int or None
+        :type limit: int, optional
         :param offset: Offset
-        :type offset: int or None
+        :type offset: int, optional
         :param order_by: Order results by values of the specified attribute.
-        :type order_by: str or None
+        :type order_by: str, optional
         :param sort_order: Sort results is ascending or descending order for attribute values specified by order_by.
-        :type sort_order: str or None
+        :type sort_order: str, optional
         :param filter_variable: The attribute to filter results by.
-        :type filter_variable: str or None
+        :type filter_variable: str, optional
         :param filter_value: The value of the filter_variable attribute to filter results by.
-        :type filter_value: str or None
+        :type filter_value: str, optional
         :param tag_names:  List of tag names that series match all of.
-        :type tag_names: list of str or None
+        :type tag_names: list of str, optional
         :param exclude_tag_names:  List of tag names that series match none of.
-        :type exclude_tag_names: list of str or None
+        :type exclude_tag_names: list of str, optional
         :return: List of series for the given category id.
         :rtype: list
         """
@@ -208,23 +208,23 @@ class FredClient(object):
         :param realtime_end: YYYY-MM-DD formatted string
         :type realtime_end: string or None
         :param limit: The maximum number of results to return.
-        :type limit: int or None
+        :type limit: int, optional
         :param offset: Offset
-        :type offset: int or None
+        :type offset: int, optional
         :param sort_order: Sort results is ascending or descending observation_date order.
-        :type sort_order: str or None
+        :type sort_order: str, optional
         :param observation_start: The start of the observation period. YYYY-MM-DD formatted string.
-        :type observation_start: str or None
+        :type observation_start: str, optional
         :param observation_end: The end of the observation period. YYYY-MM-DD formatted string.
-        :type observation_end: str or None
+        :type observation_end: str, optional
         :param units: A key that indicates a data value transformation.
-        :type units: str or None
+        :type units: str, optional
         :param frequency: A key that indicates a lower frequency to aggregate values to.
-        :type frequency: str or None
+        :type frequency: str, optional
         :param aggregation_method: A key that indicates the aggregation method used for frequency aggregation.
-        :type aggregation_method: str or None
+        :type aggregation_method: str, optional
         :param output_type: An integer that indicates an output type.
-        :type output_type: int or None
+        :type output_type: int, optional
         :return: A dict containing the observation values.
         :rtype: dict
         """
@@ -265,23 +265,23 @@ class FredClient(object):
         :param realtime_end: YYYY-MM-DD formatted string
         :type realtime_end: string or None
         :param limit: The maximum number of results to return.
-        :type limit: int or None
+        :type limit: int, optional
         :param offset: Offset
-        :type offset: int or None
+        :type offset: int, optional
         :param sort_order: Sort results is ascending or descending observation_date order.
-        :type sort_order: str or None
+        :type sort_order: str, optional
         :param observation_start: The start of the observation period. YYYY-MM-DD formatted string.
-        :type observation_start: str or None
+        :type observation_start: str, optional
         :param observation_end: The end of the observation period. YYYY-MM-DD formatted string.
-        :type observation_end: str or None
+        :type observation_end: str, optional
         :param units: A key that indicates a data value transformation.
-        :type units: str or None
+        :type units: str, optional
         :param frequency: A key that indicates a lower frequency to aggregate values to.
-        :type frequency: str or None
+        :type frequency: str, optional
         :param aggregation_method: A key that indicates the aggregation method used for frequency aggregation.
-        :type aggregation_method: str or None
+        :type aggregation_method: str, optional
         :param output_type: An integer that indicates an output type.
-        :type output_type: int or None
+        :type output_type: int, optional
         :return: A pandas Series for the Fred series.
         :rtype: pandas.Series
         """
