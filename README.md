@@ -64,6 +64,8 @@ For a list of all FredClient methods, see [PyFred Read the Docs API](https://pyf
 
 Pull requests are welcome!
 
+Make sure unit tests are passing by running `./run_tests.sh`.
+
 ## Links
 
  - FRED: [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/)
