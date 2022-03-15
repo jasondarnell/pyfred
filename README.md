@@ -60,6 +60,10 @@ Length: 224, dtype: float64
 
 For a list of all FredClient methods, see [PyFred Read the Docs API](https://pyfredclient.readthedocs.io/en/stable/api.html).
 
+## Contributions
+
+Pull requests are welcome!
+
 ## Links
 
  - FRED: [https://fred.stlouisfed.org/](https://fred.stlouisfed.org/)
