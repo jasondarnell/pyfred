@@ -1,19 +1,29 @@
 
 import os
+from time import sleep
+from http import HTTPStatus
+import logging
+
 import requests
 import pandas as pd
+from expiringdict import ExpiringDict
 
 from pyfred.ex import ApiKeyNotFound, FredItemNotFound
 
 
 # API doc: https://fred.stlouisfed.org/docs/api/fred/
 
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://api.stlouisfed.org/fred"
 FILE_TYPE = "json"
 ROOT_CATEGORY_ID = 0
 DEFAULT_LIMIT = 1000
+DEFAULT_OBS_LIMIT = 100000
 DEFAULT_OFFSET = 0
+RATE_DELAY = 0.5
+NUM_RETRIES = 3
+RETRY_DELAY = 10
 
 
 class FredClient(object):
@@ -24,6 +34,22 @@ class FredClient(object):
             raise ApiKeyNotFound("Please provide an api key to FredClient or "
                                  "set FRED_API_KEY as an environment variable.")
         self._api_key = api_key
+        self._cache = ExpiringDict(max_len=100, max_age_seconds=60*10)
+
+    def _attempt_get_with_retry(self, url):
+        for i in range(NUM_RETRIES):
+            r = requests.get(url)
+            if HTTPStatus.OK == r.status_code:
+                return r.json()
+            elif HTTPStatus.TOO_MANY_REQUESTS == r.status_code and i < NUM_RETRIES:
+                logger.warning(f"Exceeded rate limit. Sleeping for "
+                               f"{RETRY_DELAY} seconds and then will retry.")
+                sleep(RETRY_DELAY)
+            else:
+                raise RuntimeError(f"Error occurred getting '{url}' "
+                                   f"({r.status_code}):\n\n{r.text}")
+        raise RuntimeError(f"Error occurred getting '{url}' "
+                           f"({r.status_code}):\n\n{r.text}")
 
     def _get(self, path, url_args={}):
         url_args["api_key"] = self._api_key
@@ -32,9 +58,19 @@ class FredClient(object):
             f"{key}={val}" for key, val in url_args.items() if val is not None
         ])
         url = f"{BASE_URL}/{path}?{args}"
-        r = requests.get(url)
-        # TODO: validate
-        data = r.json()
+        if url in self._cache:
+            print("Got data from cache.")
+            return self._cache[url]
+        sleep(RATE_DELAY)
+        #print(f"GET {url}")
+        data = self._attempt_get_with_retry(url)
+
+        # r = requests.get(url)
+        # if HTTPStatus.OK != r.status_code:
+        #     raise RuntimeError(f"Error occurred getting '{url}' "
+        #                        f"({r.status_code}):\n\n{r.text}")
+        # data = r.json()
+        self._cache[url] = data
         # print(f"\nURL: {url}")
         # print(data)
         # print("")
@@ -192,7 +228,7 @@ class FredClient(object):
         return seriess[0]
 
     def get_series_observations(self, series_id, realtime_start=None,
-                                realtime_end=None, limit=DEFAULT_LIMIT,
+                                realtime_end=None, limit=DEFAULT_OBS_LIMIT,
                                 offset=None, sort_order=None,
                                 observation_start=None, observation_end=None,
                                 units=None, frequency=None,
@@ -248,7 +284,7 @@ class FredClient(object):
         return data
 
     def get_series_observations_pd(self, series_id, realtime_start=None,
-                                realtime_end=None, limit=DEFAULT_LIMIT,
+                                realtime_end=None, limit=DEFAULT_OBS_LIMIT,
                                 offset=None, sort_order=None,
                                 observation_start=None, observation_end=None,
                                 units=None, frequency=None,
