@@ -37,3 +37,17 @@ class TestFredClient(TestCase):
         expected_length = len(MOCK_CATEGORY_CHILDREN_RESP["categories"])
         self.assertEqual(expected_length, len(res))
         mock_requests_get.assert_called_once()
+
+    @patch("requests.get", side_effect=get_mock_response)
+    def test_get_categories_with_cache(self, mock_requests_get):
+        client = FredClient()
+        res = client.get_category_children(category_id=MOCK_CATEGORY_ID)
+        expected_length = len(MOCK_CATEGORY_CHILDREN_RESP["categories"])
+        self.assertEqual(expected_length, len(res))
+        mock_requests_get.assert_called_once()
+
+        # Second call should use cache
+        res = client.get_category_children(category_id=MOCK_CATEGORY_ID)
+        expected_length = len(MOCK_CATEGORY_CHILDREN_RESP["categories"])
+        self.assertEqual(expected_length, len(res))
+        mock_requests_get.assert_called_once()  # Should still be one call
