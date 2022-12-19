@@ -30,7 +30,6 @@ class TestFredClient(TestCase):
         self.assertEqual(expected_length, len(res))
         mock_requests_get.assert_called_once()
 
-
     @patch("requests.get", side_effect=get_mock_response)
     def test_get_root_categories(self, mock_requests_get):
         client = FredClient()
