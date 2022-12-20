@@ -41,7 +41,8 @@ class FredClient(object):
             r = requests.get(url)
             if HTTPStatus.OK == r.status_code:
                 return r.json()
-            elif HTTPStatus.TOO_MANY_REQUESTS == r.status_code and i < NUM_RETRIES:
+            elif HTTPStatus.TOO_MANY_REQUESTS == r.status_code and \
+                    i < NUM_RETRIES:
                 logger.warning(f"Exceeded rate limit. Sleeping for "
                                f"{RETRY_DELAY} seconds and then will retry.")
                 sleep(RETRY_DELAY)
@@ -59,21 +60,10 @@ class FredClient(object):
         ])
         url = f"{BASE_URL}/{path}?{args}"
         if url in self._cache:
-            print("Got data from cache.")
             return self._cache[url]
         sleep(RATE_DELAY)
-        #print(f"GET {url}")
         data = self._attempt_get_with_retry(url)
-
-        # r = requests.get(url)
-        # if HTTPStatus.OK != r.status_code:
-        #     raise RuntimeError(f"Error occurred getting '{url}' "
-        #                        f"({r.status_code}):\n\n{r.text}")
-        # data = r.json()
         self._cache[url] = data
-        # print(f"\nURL: {url}")
-        # print(data)
-        # print("")
         return data
 
     # --------------------------------------------------------------------------
@@ -166,11 +156,13 @@ class FredClient(object):
         :type offset: int, optional
         :param order_by: Order results by values of the specified attribute.
         :type order_by: str, optional
-        :param sort_order: Sort results is ascending or descending order for attribute values specified by order_by.
+        :param sort_order: Sort results is ascending or descending order for
+        attribute values specified by order_by.
         :type sort_order: str, optional
         :param filter_variable: The attribute to filter results by.
         :type filter_variable: str, optional
-        :param filter_value: The value of the filter_variable attribute to filter results by.
+        :param filter_value: The value of the filter_variable attribute to
+        filter results by.
         :type filter_value: str, optional
         :param tag_names:  List of tag names that series match all of.
         :type tag_names: list of str, optional
@@ -195,7 +187,6 @@ class FredClient(object):
         data = self._get("category/series", url_args=args)
         return data["seriess"]
 
-
     # --------------------------------------------------------------------------
     # Releases
 
@@ -203,7 +194,6 @@ class FredClient(object):
 
     # --------------------------------------------------------------------------
     # Series
-
     def get_series(self, series_id, realtime_start=None, realtime_end=None):
         """Get an economic data series.
 
@@ -247,17 +237,22 @@ class FredClient(object):
         :type limit: int, optional
         :param offset: Offset
         :type offset: int, optional
-        :param sort_order: Sort results is ascending or descending observation_date order.
+        :param sort_order: Sort results is ascending or descending
+        observation_date order.
         :type sort_order: str, optional
-        :param observation_start: The start of the observation period. YYYY-MM-DD formatted string.
+        :param observation_start: The start of the observation period.
+        YYYY-MM-DD formatted string.
         :type observation_start: str, optional
-        :param observation_end: The end of the observation period. YYYY-MM-DD formatted string.
+        :param observation_end: The end of the observation period.
+        YYYY-MM-DD formatted string.
         :type observation_end: str, optional
         :param units: A key that indicates a data value transformation.
         :type units: str, optional
-        :param frequency: A key that indicates a lower frequency to aggregate values to.
+        :param frequency: A key that indicates a lower frequency to
+        aggregate values to.
         :type frequency: str, optional
-        :param aggregation_method: A key that indicates the aggregation method used for frequency aggregation.
+        :param aggregation_method: A key that indicates the aggregation method
+        used for frequency aggregation.
         :type aggregation_method: str, optional
         :param output_type: An integer that indicates an output type.
         :type output_type: int, optional
@@ -284,15 +279,14 @@ class FredClient(object):
         return data
 
     def get_series_observations_pd(self, series_id, realtime_start=None,
-                                realtime_end=None, limit=DEFAULT_OBS_LIMIT,
-                                offset=None, sort_order=None,
-                                observation_start=None, observation_end=None,
-                                units=None, frequency=None,
-                                aggregation_method=None, output_type=None,
-                                vintage_dates=None):
+                                   realtime_end=None, limit=DEFAULT_OBS_LIMIT,
+                                   offset=None, sort_order=None,
+                                   observation_start=None, observation_end=None,
+                                   units=None, frequency=None,
+                                   aggregation_method=None, output_type=None,
+                                   vintage_dates=None):
         """Get the observations or data values for an economic data series as a
         Pandas Series.
-
 
         :param series_id: Series ID
         :type series_id: string
@@ -304,17 +298,22 @@ class FredClient(object):
         :type limit: int, optional
         :param offset: Offset
         :type offset: int, optional
-        :param sort_order: Sort results is ascending or descending observation_date order.
+        :param sort_order: Sort results is ascending or descending
+        observation_date order.
         :type sort_order: str, optional
-        :param observation_start: The start of the observation period. YYYY-MM-DD formatted string.
+        :param observation_start: The start of the observation period.
+        YYYY-MM-DD formatted string.
         :type observation_start: str, optional
-        :param observation_end: The end of the observation period. YYYY-MM-DD formatted string.
+        :param observation_end: The end of the observation period.
+        YYYY-MM-DD formatted string.
         :type observation_end: str, optional
         :param units: A key that indicates a data value transformation.
         :type units: str, optional
-        :param frequency: A key that indicates a lower frequency to aggregate values to.
+        :param frequency: A key that indicates a lower frequency to
+        aggregate values to.
         :type frequency: str, optional
-        :param aggregation_method: A key that indicates the aggregation method used for frequency aggregation.
+        :param aggregation_method: A key that indicates the aggregation method
+        used for frequency aggregation.
         :type aggregation_method: str, optional
         :param output_type: An integer that indicates an output type.
         :type output_type: int, optional
