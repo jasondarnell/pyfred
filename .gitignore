@@ -46,3 +46,4 @@ cov_html
 *node_modules*
 
 *.vscode*
+htmlcov/
