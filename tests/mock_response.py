@@ -27,7 +27,6 @@ MOCK_RESPONSES = {
 def get_mock_response(*args, **kwargs):
     url = args[0]
     path = url.split("?")[0].split("fred")[-1]
-    print(path)
     if path not in MOCK_RESPONSES:
         raise RuntimeError(f"Unhandled path: {path}")
     content = MOCK_RESPONSES[path]
